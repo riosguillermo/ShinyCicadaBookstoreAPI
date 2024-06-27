@@ -1,0 +1,6 @@
+@ShinyCicadaBookstoreAPI_HostAddress = http://localhost:5195
+
+GET {{ShinyCicadaBookstoreAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
