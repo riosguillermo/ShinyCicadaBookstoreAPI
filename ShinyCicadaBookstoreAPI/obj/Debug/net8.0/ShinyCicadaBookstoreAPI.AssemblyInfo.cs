@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ShinyCicadaBookstoreAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a61f5ab70c0f74572473cab85b2c0a8c7c7b89d")]
 [assembly: System.Reflection.AssemblyProductAttribute("ShinyCicadaBookstoreAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ShinyCicadaBookstoreAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

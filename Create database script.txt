@@ -1,0 +1,174 @@
+--SCRIPT FOR CREATE SHINY CICADA BOOKSTORE DATABASE IN SQLSERVER
+
+--First create database
+CREATE DATABASE ShinyCicadaBookstoreDatabase;
+
+--Then use it
+USE ShinyCicadaBookstoreDatabase;
+
+--Create the tables one by one:
+
+-- Person
+CREATE TABLE Person(
+    PersonID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL,
+    UserPassword VARCHAR(255) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    FirstName VARCHAR(100),
+	LastName VARCHAR(100),
+    PhoneNumber VARCHAR(20),
+    CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- Publisher
+CREATE TABLE Publisher (
+    PublisherID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    PublisherName VARCHAR(100) NOT NULL,
+    CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- BookFormat
+CREATE TABLE BookFormat (
+    FormatID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    FormatName VARCHAR(50) NOT NULL,
+    CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- Author
+CREATE TABLE Author (
+    AuthorID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    AuthorName VARCHAR(100) NOT NULL,
+	AuthorBiography TEXT,
+    CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- Category
+CREATE TABLE Category (
+    CategoryID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    CategoryName VARCHAR(50) NOT NULL,
+	CategoryDescription TEXT,
+    CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- BookLanguage
+CREATE TABLE BookLanguage (
+    BookLanguageID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    BookLanguageName VARCHAR(50) NOT NULL,
+    CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- OrderStatus
+CREATE TABLE OrderStatus (
+    OrderStatusID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    OrderStatusName VARCHAR(50) NOT NULL,
+    CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- Book
+CREATE TABLE Book(
+    BookID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+	Synopsis TEXT,
+	PublicationDate DATE,
+	ISBN VARCHAR(20),
+	Price DECIMAL(10,2) NOT NULL,
+	StockQuantity INT NOT NULL,
+	PublisherID INT REFERENCES Publisher(PublisherID),
+	FormatID INT REFERENCES BookFormat(FormatID),
+	LanguageID INT REFERENCES BookLanguage(BookLanguageID),
+    CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- Review
+CREATE TABLE Review(
+    ReviewID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	BookID INT REFERENCES Book(BookID),
+	PersonID INT REFERENCES Person(PersonID),
+	Recommends BIT,
+	Comment TEXT,
+	ReviewDate DATETIME,
+    CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- BookAuthor
+CREATE TABLE BookAuthor(
+    BookID INT,
+	AuthorID INT,
+	PRIMARY KEY(BookID, AuthorID),
+	FOREIGN KEY(BookID) REFERENCES Book(BookID) ON DELETE CASCADE,
+	FOREIGN KEY(AuthorID) REFERENCES Author(AuthorID) ON DELETE CASCADE,
+);
+
+-- BookCategory
+CREATE TABLE BookCategory(
+    BookID INT,
+	CategoryID INT,
+	PRIMARY KEY(BookID, CategoryID),
+	FOREIGN KEY(BookID) REFERENCES Book(BookID) ON DELETE CASCADE,
+	FOREIGN KEY(CategoryID) REFERENCES Category(CategoryID) ON DELETE CASCADE,
+);
+
+-- Cart
+CREATE TABLE Cart(
+    CartID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	PersonID INT REFERENCES Person(PersonID),
+	CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- CartItem
+CREATE TABLE CartItem(
+    CartItemID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	CartID INT REFERENCES Cart(CartID),
+	BookID INT REFERENCES Book(BookID),
+	Quantity INT NOT NULL,
+	UnitPrice DECIMAL(10,2) NOT NULL,
+	CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- SaleOrder
+CREATE TABLE SaleOrder(
+    SaleOrderID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	PersonID INT REFERENCES Person(PersonID),
+	SaleOrderDate DATETIME NOT NULL,
+	TotalAmount DECIMAL(14,2) NOT NULL,
+	StatusID INT REFERENCES OrderStatus(OrderStatusID),
+	CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME
+);
+
+-- SaleOrderItem
+CREATE TABLE SaleOrderItem(
+    SaleOrderItemID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	SaleOrderID INT,
+	BookID INT,
+	Quantity INT NOT NULL,
+	UnitPrice decimal(10,2) NOT NULL,
+	CreatedDate DATETIME NOT NULL,
+	ModifiedDate DATETIME NOT NULL,
+	DeleteDate DATETIME,
+	FOREIGN KEY (SaleOrderID) REFERENCES SaleOrder(SaleOrderID) ON DELETE CASCADE,
+	FOREIGN KEY (BookID) REFERENCES Book(BookID) ON DELETE CASCADE
+);
