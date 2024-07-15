@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="DataModel\" />
-    <Folder Include="Services\Implementation\" />
-    <Folder Include="Services\Interfaces\" />
     <Folder Include="Services\Repository\" />
   </ItemGroup>
 
