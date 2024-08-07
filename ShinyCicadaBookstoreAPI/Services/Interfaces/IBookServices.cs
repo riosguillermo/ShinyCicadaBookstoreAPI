@@ -6,5 +6,7 @@ namespace ShinyCicadaBookstoreAPI.Services.Interfaces
     public interface IBookServices
     {
         Task<ResponseDto<GetBookResponseDto>> GetBookByID(int id);
+
+        Task<ResponseDto<List<GetBookResponseDto>>> GetAllBooks();
     }
 }

@@ -17,10 +17,16 @@ namespace ShinyCicadaBookstoreAPI.Controllers
             _bookServices = bookServices;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ResponseDto<GetBookResponseDto>> GetBookByID(int id)
         {
             return await _bookServices.GetBookByID(id);
+        }
+
+        [HttpGet]
+        public async Task<ResponseDto<List<GetBookResponseDto>>> GetAllBooks()
+        {
+            return await _bookServices.GetAllBooks();
         }
     }
 }

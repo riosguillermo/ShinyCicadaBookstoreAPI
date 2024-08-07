@@ -51,5 +51,34 @@ namespace ShinyCicadaBookstoreAPI.Services.Implementation
                 };
             }
         }
+
+        public async Task<ResponseDto<List<GetBookResponseDto>>> GetAllBooks()
+        {
+            var BookList = _dbContext.Books.ToList();
+            var res = new List<GetBookResponseDto>();
+
+            foreach (var book in BookList)
+            {
+                res.Add(new GetBookResponseDto()
+                {
+                    BookId = book.BookId,
+                    Title = book.Title,
+                    Synopsis = book.Synopsis,
+                    PublicationDate = book.PublicationDate,
+                    ISBN = book.Isbn,
+                    StockQuantity = book.StockQuantity,
+                    PublisherId = book.PublisherId,
+                    FormatId = book.FormatId,
+                    LanguageId = book.LanguageId
+                });
+            }
+
+            return new ResponseDto<List<GetBookResponseDto>>
+            {
+                Status = System.Net.HttpStatusCode.OK,
+                Message = "Full Books list",
+                Data = res
+            };
+        }
     }
 }
