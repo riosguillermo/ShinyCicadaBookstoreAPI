@@ -24,7 +24,7 @@ namespace ShinyCicadaBookstoreAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ResponseDto<List<GetBookResponseDto>>> GetAllBooks()
+        public async Task<ResponseDto<IEnumerable<GetBookResponseDto>>> GetAllBooks()
         {
             return await _bookServices.GetAllBooks();
         }

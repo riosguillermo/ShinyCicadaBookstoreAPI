@@ -52,7 +52,7 @@ namespace ShinyCicadaBookstoreAPI.Services.Implementation
             }
         }
 
-        public async Task<ResponseDto<List<GetBookResponseDto>>> GetAllBooks()
+        public async Task<ResponseDto<IEnumerable<GetBookResponseDto>>> GetAllBooks()
         {
             var BookList = _dbContext.Books.ToList();
             var res = new List<GetBookResponseDto>();
@@ -73,7 +73,7 @@ namespace ShinyCicadaBookstoreAPI.Services.Implementation
                 });
             }
 
-            return new ResponseDto<List<GetBookResponseDto>>
+            return new ResponseDto<IEnumerable<GetBookResponseDto>>
             {
                 Status = System.Net.HttpStatusCode.OK,
                 Message = "Full Books list",
