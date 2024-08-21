@@ -22,7 +22,7 @@ namespace ShinyCicadaBookstoreAPI.Services.Implementation
             {
                 var res = new GetBookResponseDto()
                 {
-                    BookId = book.BookId,
+                    ID = book.BookId,
                     Title = book.Title,
                     Synopsis = book.Synopsis,
                     PublicationDate = book.PublicationDate,
@@ -61,7 +61,7 @@ namespace ShinyCicadaBookstoreAPI.Services.Implementation
             {
                 res.Add(new GetBookResponseDto()
                 {
-                    BookId = book.BookId,
+                    ID = book.BookId,
                     Title = book.Title,
                     Synopsis = book.Synopsis,
                     PublicationDate = book.PublicationDate,

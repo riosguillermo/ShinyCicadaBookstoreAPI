@@ -4,7 +4,7 @@ namespace ShinyCicadaBookstoreAPI.DataModel.DTOs.Book
 {
     public class GetBookResponseDto
     {
-        public int BookId { get; set; }
+        public int ID { get; set; }
 
         public string Title { get; set; } = null!;
 
