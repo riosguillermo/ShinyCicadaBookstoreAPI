@@ -5,11 +5,11 @@ using ShinyCicadaBookstoreAPI.Services.Interfaces;
 
 namespace ShinyCicadaBookstoreAPI.Services.Implementation
 {
-    public class BookServices : IBookServices
+    public class BooksServices : IBooksServices
     {
         private readonly ShinyCicadaBookstoreDatabaseContext _dbContext;
 
-        public BookServices(ShinyCicadaBookstoreDatabaseContext dbContext)
+        public BooksServices(ShinyCicadaBookstoreDatabaseContext dbContext)
         {
             _dbContext = dbContext;
         }

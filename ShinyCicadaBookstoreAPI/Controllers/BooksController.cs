@@ -8,11 +8,11 @@ namespace ShinyCicadaBookstoreAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookController : ControllerBase
+    public class BooksController : ControllerBase
     {
-        private readonly IBookServices _bookServices;
+        private readonly IBooksServices _bookServices;
 
-        public BookController(IBookServices bookServices)
+        public BooksController(IBooksServices bookServices)
         {
             _bookServices = bookServices;
         }

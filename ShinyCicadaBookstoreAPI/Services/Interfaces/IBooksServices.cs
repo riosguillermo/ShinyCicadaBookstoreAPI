@@ -3,7 +3,7 @@ using ShinyCicadaBookstoreAPI.DataModel.DTOs.Book;
 
 namespace ShinyCicadaBookstoreAPI.Services.Interfaces
 {
-    public interface IBookServices
+    public interface IBooksServices
     {
         Task<ResponseDto<GetBookResponseDto>> GetBookByID(int id);
 

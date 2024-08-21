@@ -10,7 +10,7 @@ builder.Services.AddDbContext<ShinyCicadaBookstoreDatabaseContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"))
 );
 
-builder.Services.AddScoped<IBookServices, BookServices>();
+builder.Services.AddScoped<IBooksServices, BooksServices>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
